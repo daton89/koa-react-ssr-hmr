@@ -82,13 +82,6 @@ router.get('/*', async ctx => {
       ${scriptTags}
     </body>
   </html>`
-
-  // await ctx.render('index', {
-  //   html,
-  //   state: store.getState(),
-  //   title: 'React Redux HMR SSR Starter Kit',
-  //   production: process.env.NODE_ENV === 'production',
-  // })
 })
 
 module.exports = router
