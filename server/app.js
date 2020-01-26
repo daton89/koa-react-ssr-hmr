@@ -2,7 +2,6 @@
 
 const path = require('path')
 const Koa = require('koa')
-const views = require('koa-views')
 const serve = require('koa-static')
 const bodyParser = require('koa-bodyparser')
 const favicon = require('koa-favicon')
@@ -23,7 +22,6 @@ module.exports = {
   create: async () => {
     app.use(favicon())
     app.use(serve(path.join(__dirname, '../public')))
-    app.use(views(path.join(__dirname, '../views'), { extension: 'pug' }))
     app.use(bodyParser({ jsonLimit: '56kb' }))
 
     if (process.env.ENABLE_SSR === '1') {

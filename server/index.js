@@ -1,12 +1,14 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-// require('dotenv').config()
-require('../config/babel.register')
+require('dotenv').config()
 
-function setGlobalScope(scope) {
+if (process.env.NODE_ENV === 'development') {
+  require('../config/babel.register')
+}
+
+function initGlobalScope(scope) {
   global[scope] = {}
 }
 
-setGlobalScope('window')
+initGlobalScope('window')
 
 const app = require('./app')
 const { port } = require('./config.base')
