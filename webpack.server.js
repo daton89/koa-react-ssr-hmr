@@ -1,6 +1,6 @@
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const webpackMerge = require('webpack-merge')
 
 const baseConfig = require('./webpack.base')
@@ -11,12 +11,10 @@ const DIST_PATH = path.resolve(__dirname, 'public/dist/node')
 const production = NODE_ENV === 'production'
 const development = !NODE_ENV || NODE_ENV === 'development'
 
-const target = 'node'
-
 const serverConfig = {
-  name: target,
+  name: 'node',
   mode: development ? 'development' : 'production',
-  target,
+  target: 'node',
   entry: ['./client/index.js'],
   module: {
     rules: [
@@ -26,7 +24,7 @@ const serverConfig = {
         use: {
           loader: 'babel-loader',
           options: {
-            caller: { target },
+            caller: { target: 'node' },
           },
         },
       },
@@ -47,7 +45,7 @@ const serverConfig = {
     path: DIST_PATH,
     filename: production ? '[name]-bundle-[chunkhash:8].js' : '[name].js',
     publicPath: '/',
-    libraryTarget: target === 'node' ? 'commonjs2' : undefined,
+    libraryTarget: 'commonjs2',
   },
   plugins: [
     // new MiniCssExtractPlugin(),
